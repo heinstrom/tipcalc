@@ -14,12 +14,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tipControl: UISegmentedControl!
+    @IBOutlet weak var settingsButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tipLabel.text = "$0.00"
         totalLabel.text = "$0.00"
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        var defaults = NSUserDefaults.standardUserDefaults()
+        var defaultTip = defaults.integerForKey("default_tip")
+        tipControl.selectedSegmentIndex = defaultTip
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,6 +46,9 @@ class ViewController: UIViewController {
     @IBAction func onTap(sender: AnyObject) {
         view.endEditing(true)
     }
-
+    @IBAction func onSettingsButton(sender: AnyObject) {
+        let vc = SettingsViewController();
+        self.navigationController?.pushViewController(vc, animated: true);
+    }
 }
 
